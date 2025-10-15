@@ -6,13 +6,13 @@ public class Array {
 
         int[] index = new int[11];
 
-        int[] arr = {1,2,3,4,5,6,7,8,9,10};
+        int[] arr = {1,1,3,3,5,6,7,8,4,10};
         for (int num : arr) {
             index[num]++;
         }
 
-        for (int num : arr) {
-            System.out.println(num + "의 출현횟수 " + index[num] + "회");
+        for (int i = 1; i < index.length; i++) {
+            System.out.println(i + "의 출현횟수 " + index[i] + "회");
         }
 
         /**
