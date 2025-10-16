@@ -1,7 +1,5 @@
 package com.scsa.pattern.vo;
 
-import com.scsa.pattern.dao.ProductDAO;
-
 /**
  * ValueObject
  */
@@ -45,10 +43,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "productId='" + productId + '\'' +
-                ", productName='" + productName + '\'' +
-                ", price=" + price +
-                '}';
+        return "상품번호:'" + productId + '\'' +
+                ", 상품명:'" + productName + '\'' +
+                ", 가격:" + price;
     }
+
 }
