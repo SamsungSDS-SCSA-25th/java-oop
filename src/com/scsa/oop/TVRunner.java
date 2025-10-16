@@ -1,4 +1,4 @@
-package oop;
+package com.scsa.oop;
 
 public class TVRunner {
 
@@ -6,7 +6,7 @@ public class TVRunner {
 
     public static void main(String[] args) {
 
-        TV tv1 = new TV(false,1, 20); // 지역변수
+        TV tv1 = new TV(); // 지역변수
 
         tv1.powerON();
         tv1.volumeUp();
@@ -16,6 +16,12 @@ public class TVRunner {
         tv1.setVolume(3);
         tv1.setChannel(7);
         System.out.println(tv1);
+
+        System.out.println("==========================");
+
+        TV tv2 = new TV(false, 19, 7);
+
+
 
     }
 

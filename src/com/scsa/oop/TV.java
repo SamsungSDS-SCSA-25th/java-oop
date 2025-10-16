@@ -1,4 +1,4 @@
-package oop;
+package com.scsa.oop;
 
 /**
  * <p><b>TV</b> 모델의 간단한 구현 클래스입니다. 전원, 채널(1~87), 볼륨(0~100)을 관리하며
@@ -38,6 +38,13 @@ public class TV {
      * 현재 볼륨(0~100).
      */
     private int volume;
+
+    /**
+     * default constructor.
+     * 주어진 초기 상태로 TV를 생성합니다.
+     */
+    public TV() {
+    }
 
     /**
      * 주어진 초기 상태로 TV를 생성합니다.

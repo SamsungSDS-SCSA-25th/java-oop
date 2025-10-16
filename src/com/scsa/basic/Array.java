@@ -1,6 +1,4 @@
-package basic;
-
-import java.util.Arrays;
+package com.scsa.basic;
 
 public class Array {
 
