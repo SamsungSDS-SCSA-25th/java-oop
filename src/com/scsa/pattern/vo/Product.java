@@ -1,7 +1,5 @@
 package com.scsa.pattern.vo;
 
-import com.scsa.pattern.dao.ProductDAO;
-
 import java.util.Objects;
 
 /**
