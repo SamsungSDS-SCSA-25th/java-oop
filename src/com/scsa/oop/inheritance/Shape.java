@@ -1,6 +1,6 @@
 package com.scsa.oop.inheritance;
 
-public class Shape {
+public abstract class Shape {
 
     protected double area;
 
@@ -11,6 +11,6 @@ public class Shape {
                 '}';
     }
 
-    void calArea() {}
+    abstract void calArea();
 
 }

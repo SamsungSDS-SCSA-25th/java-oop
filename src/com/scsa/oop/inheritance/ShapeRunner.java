@@ -13,6 +13,8 @@ public class ShapeRunner {
         rectangle.calArea();
         System.out.println(rectangle);
 
+//        Shape shape = new Shape();
+
     }
 
 }
