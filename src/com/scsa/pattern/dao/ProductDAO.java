@@ -18,22 +18,20 @@ public class ProductDAO {
     /**
      * 저장소에 상품을 저장한다.
      * 저장할 상품의 상품번호가 이미 저장소에 있다면, "이미 저장된 상품입니다" 메시지를 출력하고 저장하지 않는다.
-     * @param product
+     * @param targetProduct
      */
-    public void insert(Product product) {
-        
-        String productId = product.getProductId();
+    public void insert(Product targetProduct) {
 
         // validation
-        for (Product p : products.values()) {
-            if (p.getProductId().equals(productId)) {
-                System.out.println("상품번호: " + product.getProductId() + "상품명: " + product.getProductName() + " -> 중복된 상품번호가 들어 갔습니다.");
+        for (Product tempProduct : products.values()) {
+            if (tempProduct.equals(targetProduct)) {
+                System.out.println("상품번호: " + targetProduct.getProductId() + "상품명: " + targetProduct.getProductName() + " -> 중복된 상품번호가 들어 갔습니다.");
                 System.out.println("==================================");
                 return;
             }
         }
         
-        products.put(totalCnt, product);
+        products.put(totalCnt, targetProduct);
         totalCnt++;
 
     }
