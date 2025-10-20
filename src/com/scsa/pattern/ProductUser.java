@@ -35,7 +35,7 @@ public class ProductUser {
 
         while (true) {
 
-            System.out.println("작업을 선택하세요: 1-상품추가, 2-상품전체조회, 3-상품삭제, 9-종료");
+            System.out.println("작업을 선택하세요: 1-상품추가, 2-상품전체조회, 3-상품번호로 조회, 4-상품삭제, 9-종료");
             System.out.print("작업구분: ");
             int num = scanner.nextInt();
 
@@ -45,7 +45,11 @@ public class ProductUser {
                     store.insert();
                 } else if (num == 2) { // 2-상품전체조회
                     store.findAll();
-                } else if (num == 3) { // 3-상품삭제 / 삭제하려는 상품이 없습니다.
+                } else if (num == 3) { // 3-상품번호로 조회
+                    System.out.print("상품번호 입력: ");
+                    String next = scanner.next();
+                    store.findById(next);
+                } else if (num == 4) { // 4-상품삭제 / 삭제하려는 상품이 없습니다.
                     store.delete();
                 } else if (num == 9) { // 9-종료
                     store.exit();

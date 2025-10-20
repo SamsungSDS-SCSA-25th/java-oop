@@ -8,15 +8,12 @@ import java.util.*;
 /**
  * Data Access Object
  */
-public class ProductDAOHashMap {
+public class ProductDAOHashMap implements ProductDAO {
 
     private static final Map<Integer, Product> products = new HashMap<>();
     private static int totalCnt = 0;
 
-    /**
-     * 저장소에 상품을 저장한다.
-     * 저장할 상품의 상품번호가 이미 저장소에 있다면, "이미 저장된 상품입니다" 메시지를 출력하고 저장하지 않는다.
-     */
+    @Override
     public void insert() {
 
         Scanner scanner = new Scanner(System.in);
@@ -50,6 +47,7 @@ public class ProductDAOHashMap {
 
     }
 
+    @Override
     public void findAll() {
 
         System.out.println(">>상품전체조회작업<<");
@@ -77,6 +75,35 @@ public class ProductDAOHashMap {
 
     }
 
+    @Override
+    public void findById(String productId) {
+
+        System.out.println(">>상품번호로 조회작업<<");
+
+        // 1. 상품 찾아서 List에 넣기
+        boolean flag = false;
+        for (int i = 0; i < totalCnt; i++) {
+            if (productId.equals(products.get(i).getProductId())) {
+
+                // 3. 출력
+                System.out.println(products.get(i));
+                System.out.println("==================================");
+
+                flag = true;
+                break;
+            }
+        }
+
+        // 2. validation
+        if (!flag) {
+             System.out.println("DB에 상품이 없습니다.");
+             System.out.println("==================================");
+             return;
+        }
+
+    }
+
+    @Override
     public void delete() {
 
         Scanner scanner = new Scanner(System.in);
@@ -101,6 +128,7 @@ public class ProductDAOHashMap {
         System.out.println("==================================");
     }
 
+    @Override
     public void exit() {
         System.out.println("시스템을 종료합니다.");
     }
