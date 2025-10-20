@@ -14,23 +14,9 @@ public class ProductDAOHashMap implements ProductDAO {
     private static int totalCnt = 0;
 
     @Override
-    public void insert() {
+    public void insert(Product targetProduct) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        // 1. 입력값 받기
-        System.out.println(">>상품추가작업<<");
-        System.out.print("상품번호: ");
-        String productId = scanner.next();
-        System.out.print("상품명: ");
-        String productName = scanner.next();
-        System.out.print("가격: ");
-        Integer productPrice = scanner.nextInt();
-
-        // 2. Product 객체 만들기
-        Product targetProduct = new Product(productId, productName, productPrice);
-
-        // 3. validation
+        // validation
         for (Product tempProduct : products.values()) {
             if (tempProduct.equals(targetProduct)) {
                 throw new DuplicateIdException("상품번호: " + targetProduct.getProductId() +
@@ -38,19 +24,14 @@ public class ProductDAOHashMap implements ProductDAO {
             }
         }
 
-        // 4. store에 저장
+        // store에 저장
         products.put(totalCnt, targetProduct);
         totalCnt++;
-
-        System.out.println("상품이 추가되었습니다.");
-        System.out.println("==================================");
 
     }
 
     @Override
     public void findAll() {
-
-        System.out.println(">>상품전체조회작업<<");
 
         // 1. 상품 찾아서 List에 넣기
         List<Product> result = new ArrayList<>();
@@ -78,42 +59,31 @@ public class ProductDAOHashMap implements ProductDAO {
     @Override
     public void findById(String productId) {
 
-        System.out.println(">>상품번호로 조회작업<<");
+        if (productId == null || productId.isBlank()) {
+            System.out.println("상품번호가 올바르지 않습니다.");
+            System.out.println("==================================");
+            return;
+        }
 
-        // 1. 상품 찾아서 List에 넣기
-        boolean flag = false;
         for (int i = 0; i < totalCnt; i++) {
-            if (productId.equals(products.get(i).getProductId())) {
-
-                // 3. 출력
-                System.out.println(products.get(i));
+            Product p = products.get(i);
+            if (p == null) continue; // null 안전
+            if (productId.equals(p.getProductId())) {
+                System.out.println(p);
                 System.out.println("==================================");
-
-                flag = true;
-                break;
+                return; // 찾으면 즉시 종료
             }
         }
 
-        // 2. validation
-        if (!flag) {
-             System.out.println("DB에 상품이 없습니다.");
-             System.out.println("==================================");
-             return;
-        }
+        System.out.println("DB에 해당 상품번호의 상품이 없습니다.");
+        System.out.println("==================================");
 
     }
 
     @Override
-    public void delete() {
+    public void delete(String productId) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        // 1. 입력값 받기
-        System.out.println(">>상품삭제작업<<");
-        System.out.print("상품번호: ");
-        String productId = scanner.next();
-
-        // 2. validation + 삭제
+        // validation + 삭제
         for (int key : products.keySet()) {
             Product tempProduct = products.get(key);
             if (tempProduct.getProductId().equals(productId)) {

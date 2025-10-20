@@ -1,12 +1,14 @@
 package com.scsa.pattern.dao;
 
+import com.scsa.pattern.vo.Product;
+
 public interface ProductDAO {
 
     /**
      * 저장소에 상품을 저장한다.
      * 저장할 상품의 상품번호가 이미 저장소에 있다면, "이미 저장된 상품입니다" 메시지를 출력하고 저장하지 않는다.
      */
-    void insert();
+    void insert(Product product);
 
     /**
      * 저장소에 저장된 상품을 모두 출력한다.
@@ -27,7 +29,7 @@ public interface ProductDAO {
      * - 입력받은 상품번호가 저장소에 존재하면 해당 상품을 삭제하고, 삭제 완료 메시지를 출력한다.
      * - 입력받은 상품번호가 저장소에 존재하지 않으면 "상품번호가 존재하지 않습니다." 메시지를 출력한다.
      */
-    void delete();
+    void delete(String productId);
 
     /**
      * 시스템을 종료한다.

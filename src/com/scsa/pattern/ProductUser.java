@@ -1,6 +1,7 @@
 package com.scsa.pattern;
 
 import com.scsa.pattern.dao.ProductDAOHashMap;
+import com.scsa.pattern.vo.Product;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -42,17 +43,15 @@ public class ProductUser {
             try {
                 // 1-상품추가 / 상품번호가 겹치면 안된다
                 if (num == 1) {
-                    store.insert();
+                    add(store);
                 } else if (num == 2) { // 2-상품전체조회
-                    store.findAll();
+                    findAll(store);
                 } else if (num == 3) { // 3-상품번호로 조회
-                    System.out.print("상품번호 입력: ");
-                    String next = scanner.next();
-                    store.findById(next);
+                    findById(store);
                 } else if (num == 4) { // 4-상품삭제 / 삭제하려는 상품이 없습니다.
-                    store.delete();
+                    delete(store);
                 } else if (num == 9) { // 9-종료
-                    store.exit();
+                    exit(store);
                     break;
                 } else {
                     System.out.println("올바른 값을 입력하십시오.");
@@ -66,6 +65,64 @@ public class ProductUser {
         System.out.println("===================================");
         System.out.println("프로그램 종료");
 
+    }
+
+    private static void add(ProductDAOHashMap store) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        // 입력값 받기
+        System.out.println(">>상품추가작업<<");
+        System.out.print("상품번호: ");
+        String productId = scanner.nextLine();
+        System.out.print("상품명: ");
+        String productName = scanner.nextLine();
+        System.out.print("가격: ");
+        Integer productPrice = Integer.parseInt(scanner.nextLine());
+
+        // Product 객체 만들기
+        Product targetProduct = new Product(productId, productName, productPrice);
+
+        store.insert(targetProduct);
+
+        System.out.println("상품이 추가되었습니다.");
+        System.out.println("==================================");
+
+    }
+
+    private static void findAll(ProductDAOHashMap store) {
+
+        System.out.println(">>상품전체조회작업<<");
+
+        store.findAll();
+    }
+
+    private static void findById(ProductDAOHashMap store) {
+
+        System.out.println(">>상품번호로 조회작업<<");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("상품번호 입력: ");
+        String next = scanner.nextLine();
+
+        store.findById(next);
+    }
+
+    private static void delete(ProductDAOHashMap store) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        // 입력값 받기
+        System.out.println(">>상품삭제작업<<");
+        System.out.print("상품번호: ");
+        String productId = scanner.nextLine();
+
+        store.delete(productId);
+    }
+
+    private static void exit(ProductDAOHashMap store) {
+        store.exit();
     }
 
 }
