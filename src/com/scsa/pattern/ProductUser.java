@@ -1,7 +1,8 @@
 package com.scsa.pattern;
 
-import com.scsa.pattern.dao.ProductDAOImpl;
+import com.scsa.pattern.dao.ProductDAOHashMap;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ProductUser {
@@ -30,7 +31,7 @@ public class ProductUser {
         System.out.println("프로그램 시작");
         System.out.println("===================================");
 
-        ProductDAOImpl store = new ProductDAOImpl();
+        ProductDAOHashMap store = new ProductDAOHashMap();
 
         while (true) {
 
@@ -38,20 +39,24 @@ public class ProductUser {
             System.out.print("작업구분: ");
             int num = scanner.nextInt();
 
-            // 1-상품추가 / 상품번호가 겹치면 안된다
-            if (num == 1) {
-                store.insert();
-            } else if (num == 2) { // 2-상품전체조회
-                store.findAll();
-            } else if (num == 3) { // 3-상품삭제 / 삭제하려는 상품이 없습니다.
-                store.delete();
-            } else if (num == 9) { // 9-종료
-                store.exit();
-                break;
-            } else {
-                System.out.println("올바른 값을 입력하십시오.");
+            try {
+                // 1-상품추가 / 상품번호가 겹치면 안된다
+                if (num == 1) {
+                    store.insert();
+                } else if (num == 2) { // 2-상품전체조회
+                    store.findAll();
+                } else if (num == 3) { // 3-상품삭제 / 삭제하려는 상품이 없습니다.
+                    store.delete();
+                } else if (num == 9) { // 9-종료
+                    store.exit();
+                    break;
+                } else {
+                    System.out.println("올바른 값을 입력하십시오.");
+                }
+            } catch (RuntimeException e) { // catch로 잡아서 밖으로 컴파일에러가 발생하지 않는다.
+                System.out.println(e.getMessage());
+                System.out.println(Arrays.toString(e.getStackTrace()));
             }
-
         }
 
         System.out.println("===================================");

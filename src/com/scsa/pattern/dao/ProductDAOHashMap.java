@@ -1,5 +1,6 @@
 package com.scsa.pattern.dao;
 
+import com.scsa.pattern.exception.DuplicateIdException;
 import com.scsa.pattern.vo.Product;
 
 import java.util.*;
@@ -7,7 +8,7 @@ import java.util.*;
 /**
  * Data Access Object
  */
-public class ProductDAOImpl {
+public class ProductDAOHashMap {
 
     private static final Map<Integer, Product> products = new HashMap<>();
     private static int totalCnt = 0;
@@ -35,10 +36,8 @@ public class ProductDAOImpl {
         // 3. validation
         for (Product tempProduct : products.values()) {
             if (tempProduct.equals(targetProduct)) {
-                System.out.println("상품번호: " + targetProduct.getProductId() +
+                throw new DuplicateIdException("상품번호: " + targetProduct.getProductId() +
                         "상품명: " + targetProduct.getProductName() + " -> 중복된 상품번호가 들어갔습니다.");
-                System.out.println("==================================");
-                return;
             }
         }
 
