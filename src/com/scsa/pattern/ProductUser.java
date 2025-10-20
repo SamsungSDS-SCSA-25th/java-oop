@@ -1,6 +1,7 @@
 package com.scsa.pattern;
 
 import com.scsa.pattern.dao.ProductDAOHashMap;
+import com.scsa.pattern.exception.DuplicateIdException;
 import com.scsa.pattern.vo.Product;
 
 import java.util.Arrays;
@@ -83,7 +84,13 @@ public class ProductUser {
         // Product 객체 만들기
         Product targetProduct = new Product(productId, productName, productPrice);
 
-        store.insert(targetProduct);
+        try {
+            store.insert(targetProduct);
+        } catch (DuplicateIdException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace(System.out);
+        }
+
 
         System.out.println("상품이 추가되었습니다.");
         System.out.println("==================================");
