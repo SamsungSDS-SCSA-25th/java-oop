@@ -43,9 +43,10 @@ public class ProductDAOHashMap implements ProductDAO {
 
         // 2. validation
         if (!flag) {
-            System.out.println("DB에 상품이 없습니다.");
-            System.out.println("==================================");
-            return;
+            throw new NoSuchElementException("DB에 상품이 없습니다.");
+//            System.out.println("DB에 상품이 없습니다.");
+//            System.out.println("==================================");
+//            return;
         }
 
         // 3. 출력
@@ -60,9 +61,10 @@ public class ProductDAOHashMap implements ProductDAO {
     public void findById(String productId) {
 
         if (productId == null || productId.isBlank()) {
-            System.out.println("상품번호가 올바르지 않습니다.");
-            System.out.println("==================================");
-            return;
+            throw new IllegalArgumentException("상품번호가 올바르지 않습니다.");
+//            System.out.println("상품번호가 올바르지 않습니다.");
+//            System.out.println("==================================");
+//            return;
         }
 
         for (int i = 0; i < totalCnt; i++) {
